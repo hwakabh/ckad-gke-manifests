@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-hwakabh
+  labels:
+    name: dev-hwakabh
+
+# kubectl get namespaces [ --show-labels ]
+# kubectl describe namespaces
