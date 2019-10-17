@@ -1,0 +1,17 @@
+# kubectl run pod-nginx-c --image nginx --restart Never --dry-run -o yaml > pod-dry-run.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod-nginx-c
+  name: pod-nginx-c
+spec:
+  containers:
+  - image: nginx
+    name: pod-nginx-c
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+# kubectl -n ns-hwakabh apply -f pod-dry-run.yaml
