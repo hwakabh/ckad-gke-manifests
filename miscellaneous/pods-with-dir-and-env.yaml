@@ -18,3 +18,9 @@ spec:
     - name: NAME_2
       value: Bob
     args: ["sleep", "6000"]
+
+# Check environment variables in containers with:
+# kubectl -n ns-hwakabh exec -it my-pod-dev -c web-001 /bin/sh
+# pwd ; echo $NAME_1
+# kubectl -n ns-hwakabh exec -it my-pod-dev -c web-002 /bin/sh
+# pwd ; echo $NAME_2
