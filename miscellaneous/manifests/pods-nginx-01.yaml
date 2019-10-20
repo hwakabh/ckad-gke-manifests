@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-nginx-a
+  namespace: ns-hwakabh
+spec:
+  containers:
+  - name: c-nginx-01
+    image: nginx:latest
+  - name: c-nginx-02
+    image: nginx:latest
+    workingDir: /tmp
+
+# kubectl -n ns-hwakabh apply -f ./mainfests/
