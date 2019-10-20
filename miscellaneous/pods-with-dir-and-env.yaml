@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-dev
+  namespace: ns-hwakabh
+spec:
+  containers:
+  - name: web-001
+    image: nginx:alpine
+    env:
+    - name: NAME_1
+      value: Alice
+    args: ["sleep", "6000"]
+    workingDir: /tmp
+  - name: web-002
+    image: nginx:alpine
+    env:
+    - name: NAME_2
+      value: Bob
+    args: ["sleep", "6000"]
