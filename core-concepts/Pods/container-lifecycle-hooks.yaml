@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: container-lifecycle-hooks
+  namespace: ns-hwakabh
+  labels:
+    name: dev-hwakabh
+spec:
+  containers:
+  - name: my-container
+    image: nginx:latest
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo postStart > /usr/share/message"]
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "echo preStop > /usr/share/message"]
