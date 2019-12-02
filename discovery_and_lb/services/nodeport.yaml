@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-deployment
+  namespace: ns-hwakabh
+  labels:
+    component: busybox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: busybox
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        component: busybox
+    spec:
+      containers:
+      - name: my-app-container
+        image: busybox:1.24
+        command: ['/bin/sh', '-c', 'echo App Running && sleep 600']
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-node-port
+  namespace: ns-hwakabh
+spec:
+  type: NodePort
+  selector:
+    component: busybox
+  ports:
+  - port: 80
+
