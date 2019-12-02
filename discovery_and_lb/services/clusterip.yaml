@@ -2,15 +2,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: busybox-deploy
+  name: nginx-deploy
   namespace: ns-hwakabh
   labels:
-    component: busybox
+    component: nginx
 spec:
   replicas: 2
   selector:
     matchLabels:
-      component: busybox
+      component: nginx
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        component: busybox
+        component: nginx
     spec:
       containers:
       - name: my-container
-        image: busybox:latest
+        image: nginx:latest
         command: ['/bin/sh', '-c', 'sleep 600']
 ---
 apiVersion: v1
@@ -33,7 +33,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    component: busybox
+    component: nginx
   ports:
   - protocol: TCP
     port: 8088
