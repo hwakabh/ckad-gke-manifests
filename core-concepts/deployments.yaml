@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-first-deployment
+  namespace: ns-hwakabh
+  labels:
+    name: dev-hwakabh
+spec:
+  #replicas: 2
+  replicas: 4
+  selector:
+    matchLabels:
+      component: busybox
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0%
+  template:
+    metadata:
+      labels:
+        component: busybox
+    spec:
+      containers:
+      #- image: busybox:1.24
+      - image: busybox:latest
+        name: my-busybox
+        command: ["sh", "-c", "echo The app running && sleep 60"]
