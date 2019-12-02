@@ -1,10 +1,12 @@
+---
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: nginx-rc
+  name: my-replicaset
   namespace: ns-hwakabh
 spec:
-  replicas: 2
+  #replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       name: dev-hwakabh
@@ -14,8 +16,6 @@ spec:
         name: dev-hwakabh
     spec:
       containers:
-      - image: nginx
-        name: nginx-rc-1
-        command: ["sh", "-c", "sleep 6000"]
-      - image: nginx
-        name: nginx-rc-2
+      - image: busybox:latest
+        name: my-busybox
+        command: ["sh", "-c", "echo busybox-1 running && sleep 60"]
