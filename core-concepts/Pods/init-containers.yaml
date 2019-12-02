@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-container-pods
+  namespace: ns-hwakabh
+  labels:
+    name: dev-hwakabh
+spec:
+  # Application Image
+  containers:
+  - name: my-container
+    image: busybox:latest
+    command: ['sh', '-c', 'echo The app is running && sleep 60']
+  # Pre-Running tasks
+  initContainers:
+  - name: init-container-a
+    image: busybox:latest
+    command: ['sh', '-c', 'echo hello initContainer-a && sleep 10 && echo A: SLEEP DONE']
+  - name: init-container-b
+    image: busybox:latest
+    command: ['sh', '-c', 'echo hello initContainer-b && sleep 10 && echo B: SLEEP DONE']
