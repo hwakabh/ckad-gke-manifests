@@ -1,4 +1,4 @@
-# gke-manifests
+# CKAD Manifest
 
 Managements of GKE manifests for personal developments
 
