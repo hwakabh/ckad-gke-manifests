@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-deploy-2
   namespace: ns-hwakabh
   labels:
     component: nginx
@@ -22,8 +22,7 @@ spec:
     spec:
       containers:
       - name: my-app-container
-        image: nginx:1.24
-        command: ['/bin/sh', '-c', 'echo App Running && sleep 600']
+        image: nginx:latest
 
 ---
 apiVersion: v1
@@ -36,5 +35,11 @@ spec:
   selector:
     component: nginx
   ports:
-  - port: 80
+  - protocol: TCP
+    name: http
+    port: 8088      #-> Exposed NodePort number
+    targetPort: 80  #-> Awaiting container port number
+
+#-> `gcloud compute ssh` to NOT running nginx containers, also confirm with `docker ps |grep nginx`
+#-> Externally from the Pods, `curl -X GET CLUSTER_IP:8088` to get access
 
