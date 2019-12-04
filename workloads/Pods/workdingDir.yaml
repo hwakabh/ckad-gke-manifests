@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-pod-with-env
+  name: my-pod-with-working-dir
   namespace: ns-hwakabh
   labels:
     name: dev-hwakabh
