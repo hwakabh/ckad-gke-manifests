@@ -8,7 +8,13 @@ metadata:
     name: dev-hwakabh
 spec:
   containers:
-  - name: pod-nginx-a
-    image: nginx:latest
-  - name: pod-nginx-b
-    image: nginx:latest
+  - name: busybox1
+    image: busybox:latest
+    command: ["/bin/sh", "-c", "echo hello ; sleep 3600"]
+  - name: busybox2
+    image: busybox:latest
+    #command: ["/bin/sh", "-c", "echo hello ; sleep 3600"]
+    args:
+    - /bin/sh
+    - -c
+    - echo hello; sleep 3600
