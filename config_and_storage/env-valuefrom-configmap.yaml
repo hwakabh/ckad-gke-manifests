@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+data:
+  password: some_database_password
+  username: admin
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: dbcred
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envar-demo-pod
+spec:
+  containers:
+  - name: envar-demo-container
+    image: gcr.io/google-samples/node-hello:1.0
+    env:
+    - name: DB_USERNAME
+      valueFrom:
+        configMapKeyRef:
+          # Provide name & keys of ConfigMap, then set as environmental variables with name env.name
+          name: dbcred
+          key: username
+    - name: DB_MESSAGE
+      value: "Hello Database"
