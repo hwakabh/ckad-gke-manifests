@@ -17,5 +17,5 @@ spec:
     - hard
     - nfsvers=3
   nfs:
-    server: localhost
+    server: hwakabh-master.nfvlab.local
     path: "/root/nfs/"
