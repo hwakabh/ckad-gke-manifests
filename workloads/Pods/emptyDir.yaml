@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-empty-dir
+spec:
+  containers:
+  - image: nginx:latest
+    name: container-with-dir
+    volumeMounts:
+    - mountPath: /hoge
+      name: test-volume
+  volumes:
+  - name: test-volume
+    emptyDir: {}
+
+# Check with:
+# kubectl exec -it pod-with-empty-dir /bin/sh
+# df -h
