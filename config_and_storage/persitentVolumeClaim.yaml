@@ -10,7 +10,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: slow
+  storageClassName: standard
   selector:
     matchLabels:
       volume: test_pvs

@@ -12,10 +12,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: slow
+  storageClassName: standard
   mountOptions:
     - hard
     - nfsvers=3
   nfs:
-    server: hwakabh-master.nfvlab.local
-    path: "/root/nfs/"
+    server: gke-nfs-server
+    path: "/home/hwakabh/nfs"

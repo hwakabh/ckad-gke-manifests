@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-with-pod
+spec:
+  containers:
+  - name: c1
+    image: busybox
+    command: ["/bin/sh", "-c", "sleep 6000"]
+    volumeMounts:
+    - name: testvol01
+      mountPath: /hoge
+  volumes:
+  - name: testvol01
+    persistentVolumeClaim:
+      claimName: testpvc01
