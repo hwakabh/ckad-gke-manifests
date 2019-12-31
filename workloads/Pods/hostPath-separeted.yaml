@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-hostpath-separated
+spec:
+  containers:
+  - name: c1
+    image: busybox
+    command: ["/bin/sh", "-c", "sleep 6000"]
+    volumeMounts:
+    - mountPath: /foo
+      name: test-volume01
+  - name: c2
+    image: busybox
+    command: ["/bin/sh", "-c", "sleep 6000"]
+    volumeMounts:
+    - mountPath: /bar
+      name: test-volume02
+
+  volumes:
+  - name: test-volume01
+    hostPath:
+      path: /root/c1dir
+      type: DirectoryOrCreate
+  - name: test-volume02
+    hostPath:
+      path: /root/c2dir
+      type: DirectoryOrCreate
+
+# Check with:
+# kubectl exec -it pod-with-hostpath-shared -c c1 /bin/sh
+# df -h
+#   -> Mounted on /foo
+# echo "Hello Worker-node from c1" >> /foo/testfile1
+# exit
+# kubectl exec -it pod-with-hostpath-shared -c c2 /bin/sh
+# df -h
+#   -> Mounted on /bar
+# echo "Hello Worker-node from c2" >> /bar/testfile2
+# exit
+
+# Check on worker-node:
+# ls -al /root/bar
+#   -> Directory created and testfile* exists
+
