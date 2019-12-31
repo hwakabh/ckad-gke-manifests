@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-emptydir-separeted
+spec:
+  containers:
+  - image: busybox
+    name: c1
+    command: ["/bin/sh", "-c", "sleep 6000"]
+    volumeMounts:
+    - mountPath: /foo
+      name: test-volume01
+  - image: busybox
+    name: c2
+    command: ["/bin/sh", "-c", "sleep 6000"]
+    volumeMounts:
+    - mountPath: /bar
+      name: test-volume02
+
+  volumes:
+  - name: test-volume01
+    emptyDir: {}
+  - name: test-volume02
+    emptyDir: {}
+
+# Check with:
+# kubectl exec -it pod-emptydir-separeted -c c1 /bin/sh
+# df -h
+#   -> Mountpoint /foo
+# touch /foo/testfile
+# ls -al /foo/testfile
+# exit
+# kubectl exec -it pod-emptydir-separeted -c c2 /bin/sh
+# df -h
+#   -> Mountpoint /bar
+# ls -al /bar/testfile
+#   -> No file existed.
+# exit
