@@ -1,0 +1,16 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleepjob01
+spec:
+  completions: 5
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - name: sleepcontainer01
+        image: busybox:latest
+        command: ["/bin/sh", "-c", "sleep 10"]
+      restartPolicy: Never
+
