@@ -1,0 +1,21 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: sleepcron01
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: sleepcontainer01
+            image: busybox:latest
+            command: ["/bin/sh", "-c", "date ; echo hello"]
+          restartPolicy: Never
+
+# Check with:
+# kubectl get cronjobs
+# kubectl get pods,jobs
+# kubectl logs POD_NAME
