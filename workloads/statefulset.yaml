@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sts01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: web01
+  serviceName: stateful
+  template:
+    metadata:
+      labels:
+        run: web01
+    spec:
+      containers:
+      - name: c01
+        image: busybox:latest
+        command: ["/bin/sh", "-c", "sleep 6000"]
+        volumeMounts:
+        - name: data
+          mountPath: /foo
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
