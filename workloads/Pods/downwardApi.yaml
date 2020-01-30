@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: downward-api-pod
+spec:
+  containers:
+  - image: nginx
+    name: testweb
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: downwardapi-volume
+      mountPath: /opt
+  volumes:
+  - name: downwardapi-volume
+    downwardAPI:
+      items:
+      - path: pod-name.txt
+        fieldRef:
+          fieldPath: metadata.name
+      - path: pod-uid.txt
+        fieldRef:
+          fieldPath: metadata.uid
+      - path: pod-ns.txt
+        fieldRef:
+          fieldPath: metadata.namespace
+      - path: pod-cpu-request.txt
+        resourceFieldRef:
+          containerName: testweb
+          resource: requests.cpu
