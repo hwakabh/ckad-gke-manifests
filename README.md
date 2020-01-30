@@ -1,8 +1,9 @@
-# CKAD Manifest
+# GKE Manifests
 
 - Repository of GKE manifests for personal developments
 - Motivations
-  - Preparations for `CKAD (Certified Kubernetes Application Developer)`
+  - Personal skill improvements for managing Kubernetes `Resources`
+  - Preparations for `CKAD (Certified Kubernetes Application Developer)` exams
   - Stocks of manifests as operational examples
 
 ***
