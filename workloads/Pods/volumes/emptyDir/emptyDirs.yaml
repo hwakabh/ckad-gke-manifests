@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  volumes:
+  - name: myvolume1
+    emptyDir: {}
+  - name: myvolume2
+    emptyDir: {}
+  containers:
+  - name: busybox1
+    image: busybox:latest
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 600'
+    volumeMounts:
+    - mountPath: /foo
+      name: myvolume1
+  - name: busybox2
+    image: busybox:latest
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 600'
+    volumeMounts:
+    - mountPath: /bar
+      name: myvolume2
+
+# kubectl exec -it busybox -c busybox1 -- /bin/sh
+#   df -h
+#   ls -al /foo
+#   touch /foo/busybox1
+#   ls -al /foo/busybox1
+#   exit
+# kubectl exec -it busybox -c busybox2 -- /bin/sh
+#   df -h
+#   ls -al /bar
+#   touch /bar/busybox2
+#   ls -al /bar/busybox*
+#   exit
