@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  # Same style as `kubectl create configmap cm-contents --from-file=FILENAME`
+  STRING: |
+    ping
+    pong
+metadata:
+  name: cm-contents1
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  # Same style as `kubectl create configmap cm-contents --from-env-file=ENV_FILENAME`
+  FOO: foo
+  BAR: bar
+  BAZ: baz
+metadata:
+  name: cm-contents2
+
+# kubectl get configmaps
+# kubectl get configmap/cm-contents1 -o yaml
+# kubectl describe configmap/cm-contents1
+# kubectl get configmap/cm-contents2 -o yaml
+# kubectl describe configmap/cm-contents2
