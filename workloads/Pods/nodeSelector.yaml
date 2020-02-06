@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: gke-gke-cluster01-default-pool-815bd0eb-5dc7
+  labels:
+    node: primary-node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: gke-gke-cluster01-default-pool-815bd0eb-81vm
+  labels:
+    node: secondary-node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: gke-gke-cluster01-default-pool-815bd0eb-fhst
+  labels:
+    node: third-node
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx1
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  nodeSelector:
+    node: primary-node
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx2
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  nodeSelector:
+    node: primary-node
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx3
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  nodeSelector:
+    node: secondary-node
+
+# kubectl get nodes -L node
+# kubectk get pods -o wide
