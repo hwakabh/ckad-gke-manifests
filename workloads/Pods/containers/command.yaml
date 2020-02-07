@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    # kubectl run busybox --restart=Never --image=busybox:latest -- /bin/sh -c 'echo Hello World'
+    command:
+      - /bin/sh
+      - -c
+      - 'echo Hello World'
+
+
+# kubectl get pods
+# kubectl get pod/busybox -o yaml
+# kubectl describe pod/busybox
+# kubectl logs pod/busybox
