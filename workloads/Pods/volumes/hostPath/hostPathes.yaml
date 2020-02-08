@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  volumes:
+  - name: myvolume1
+    hostPath:
+      path: /tmp/foo
+      type: DirectoryOrCreate
+  - name: myvolume2
+    hostPath:
+      path: /tmp/bar
+      type: DirectoryOrCreate
+
+  containers:
+  - name: busybox1
+    image: busybox:latest
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 600'
+    volumeMounts:
+    - name: myvolume1
+      mountPath: /foo
+  - name: busybox2
+    image: busybox:latest
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 600'
+    volumeMounts:
+    - name: myvolume2
+      mountPath: /bar
+
+# kubectl exec -it busybox -c busybox1 -- /bin/sh -c 'df -h'
+# kubectl exec -it busybox -c busybox2 -- /bin/sh -c 'df -h'
+# kubectl get pods -o wide
+# gcloud compute ssh NODE_NAME_PODS_RUNNING
+#   ls -al /tmp
