@@ -1,17 +1,54 @@
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv01
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-pv01
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
 kind: Pod
 metadata:
-  name: pvc-with-pod
+  name: busybox
 spec:
-  containers:
-  - name: c1
-    image: busybox
-    command: ["/bin/sh", "-c", "sleep 6000"]
-    volumeMounts:
-    - name: testvol01
-      mountPath: /hoge
   volumes:
-  - name: testvol01
+  - name: pvc-volume
     persistentVolumeClaim:
-      claimName: testpvc01
+      claimName: pvc-pv01
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 600'
+    volumeMounts:
+    - name: pvc-volume
+      mountPath: /mnt/pvc
+
+# kubectl get pods,pv,pvc -o wide
+# kubectl exec -it busybox -- /bin/sh -c 'echo Hello >> /mnt/pvc/testfile'
+# gcloud compute ssh NODE_NAME_POD_RUNNING
+#   cat /tmp/testfile
+#   exit
+# kubectl delete -f workloads/Pods/volumes/persistentVolumeClaim.yaml
+# gcloud compute ssh NODE_NAME_POD_RUNNING
+#   ls -al /tmp/testfile
