@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: fluentd-ds
+  name: fluentd
 spec:
   selector:
     matchLabels:
@@ -13,6 +13,11 @@ spec:
         app: fluentd
     spec:
       containers:
-      - name: fluentd-pod
+      - name: fluentd
         image: fluent/fluentd
 
+# kubectl get pods,ds
+# kubectl get pods -o wide
+#   ---> All pods created by DaemonSet would be allocated on each worker-node separatedly.
+# kubectl delete ds/fluentd
+# kubectl get pods
