@@ -6,8 +6,6 @@
   - Preparations for `CKAD (Certified Kubernetes Application Developer)` exams
   - Stocks of manifests as operational examples
 
-***
-
 ## Launching your Kubernetes environment
 
 - For working out with your manifest, Kubernetes environment should be needed of course.
@@ -25,8 +23,6 @@
   - Brief procedures booting up your kubernetes cluster in GCP, for example, are:
     - Just run `gcloud container clusters YOUR_K8S_CLUSTER_NAME`
 
-***
-
 ## Envionments
 
 ```bash
@@ -34,8 +30,6 @@ $ kubectl version --short=True
 Client Version: v1.15.2
 Server Version: v1.13.12-gke.25
 ```
-
-***
 
 ## Licenses and Refernces
 
