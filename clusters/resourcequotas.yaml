@@ -17,5 +17,6 @@ spec:
     limits.cpu: 2
     limits.memory: 2G
 
+# kubectl run nginx --restart=Never --image=nginx --requests='cpu=100m,memory=256Mi' --limits='cpu=200m,memory=512Mi'
 # kubectl get quota
 # kubectl get quota/rs-testings -o yaml
