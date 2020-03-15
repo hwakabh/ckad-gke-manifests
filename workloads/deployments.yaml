@@ -2,8 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-first-deployment
-  namespace: ns-hwakabh
+  name: busybox
   labels:
     name: dev-hwakabh
 spec:
@@ -22,7 +21,12 @@ spec:
         component: busybox
     spec:
       containers:
-      #- image: busybox:1.24
-      - image: busybox:latest
+      - image: busybox:1.24
+      #- image: busybox:latest
         name: my-busybox
         command: ["sh", "-c", "echo The app running && sleep 60"]
+
+# --- Change container image tag
+# kubectl set image deploy/busybox my-busybox=busybox:latest
+# --- Check rollout history
+# kubectl rollout history deploy/busybox [ --revison X ]
