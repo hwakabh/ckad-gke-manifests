@@ -12,9 +12,12 @@ spec:
       - -c
       - 'sleep 600'
     livenessProbe:
-      timeoutSeconds: 60
+      initialDelaySeconds: 60
       exec:
         command:
           - /bin/sh
           - -c
           - 'ping -c 20 localhost'
+
+# kubectl get pods
+# kubectl describe pod/busybox
