@@ -3,7 +3,7 @@
 - Repository of GKE manifests for personal developments
 - Motivations
   - Personal skill improvements for managing Kubernetes `Resources`
-  - Preparations for `CKAD (Certified Kubernetes Application Developer)` exams
+  - Preparations for `CKAD (Certified Kubernetes Application Developer)` and `CKA (Certified Kubernetes Administrator)` examinations
   - Stocks of manifests as operational examples
 
 ## Launching your Kubernetes environment
