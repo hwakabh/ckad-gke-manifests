@@ -1,6 +1,7 @@
-# GKE Manifests
+# k8s-manifests
 
-- Repository of GKE manifests for personal developments
+- Repository of Kubernetes manifests for personal developments
+  - Almost all of the manifest in this repository would be considered to play with GKE (Google Kubernetes Engine).
 - Motivations
   - Personal skill improvements for managing Kubernetes `Resources`
   - Preparations for `CKAD (Certified Kubernetes Application Developer)` and `CKA (Certified Kubernetes Administrator)` examinations
