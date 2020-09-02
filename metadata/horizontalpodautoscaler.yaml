@@ -1,13 +1,45 @@
 ---
-apiVersion: autoscaling/v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: busybox-deploy
+  name: busybox-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: busybox-deploy
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: busybox-deploy
+    spec:
+      containers:
+      - image: busybox
+        name: busybox
+        # For running out of CPU
+        command: ["dd", "if=/dev/zero", "of=/dev/null"]
+        resources:
+          requests:
+            cpu: 1000m
+---
+apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: nginx
+  name: hpa-test
 spec:
-  maxReplicas: 10
-  minReplicas: 5
+  # Sepecify `Scaled Resource Objects`
   scaleTargetRef:
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
-    name: nginx
-  targetCPUUtilizationPercentage: 50
+    name: nginx-deploy
+  # Scaled between 1-5 pods
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
