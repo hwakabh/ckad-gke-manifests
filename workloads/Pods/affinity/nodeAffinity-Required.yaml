@@ -8,37 +8,20 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx1
+  name: nginx
 spec:
   containers:
   - image: nginx
     name: nginx
-  nodeSelector:
-    node: primary-node
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx2
-spec:
-  containers:
-  - image: nginx
-    name: nginx
-  nodeSelector:
-    node: primary-node
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx3
-spec:
-  containers:
-  - image: nginx
-    name: nginx
-  nodeSelector:
-    node: secondary-node
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: node
+            operator: In
+            values: ["secondary-node"]
 
 # After applying manifest with kubectl: 
 #   kubectl get pods -o wide
-# Cleanup labels with:
-#   kubectl label node --all node-
+# and conifrm nginx pod is running on the nodes with node=secondary label
