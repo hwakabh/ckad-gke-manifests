@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-ro-resourceall
+rules:
+- apiGroups: [""]
+  # If apply rule for all of the resource, provide `ResourceAll`
+  resources: ["ResourceAll"]
+  verbs:
+  - "get"
+  - "watch"
+  - "list"
+
+# kubectl get roles
